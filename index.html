@@ -48,12 +48,14 @@
         	}
 
         	function myMap() {
+
         	    var mapCanvas = document.getElementById("divMap");
         	    var mapOptions = {
-        	        center: new google.maps.LatLng(51.5, -0.2),
-        	        zoom: 10
+        	        center: new google.maps.LatLng(40.4442567, -79.955433),
+        	        zoom: 15
         	    };
         	    var map = new google.maps.Map(mapCanvas, mapOptions);
+        	    var infoWindow = new google.maps.InfoWindow({ map: map });
 
         	    // Try HTML5 geolocation.
         	    if (navigator.geolocation) {
@@ -73,6 +75,15 @@
         	        // Browser doesn't support Geolocation
         	        handleLocationError(false, infoWindow, map.getCenter());
         	    }
+
+        	    var marker = new google.maps.Marker({
+        	        position: {
+        	            lat: 40.4443,
+                        lng: -79.9532
+        	        },
+        	        map: map
+        	    });
+
         	}
 
         	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
