@@ -1,28 +1,28 @@
-
 <html>
 
 <head>
 <!--Bootstrap-->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
 
-<body>
+<style>
+	.inactive{
+		display: none;
+	}
+</style>
+
+</head>
 
 
 <div id="divRowForButton" class="row">
 	<div class="column">
-		<button id="btnBigRedButton" class="btn-danger btn-lg">FIND CATHY</button>
+		<button id="btnBigRedButton" class="btn-danger btn-lg" onclick="hideButton()">FIND CATHY</button>
 	</div>
 </div>
 
 <script>
-	var button = document.getElementById("btnBigRedButton");
-	button.addEventListener("click", hideButton());
-	
-	
 	function hideButton(){
-		button.style.visible = 'hidden';
+		document.getElementById("btnBigRedButton").className += " inactive";
 	}
 </script>
 
