@@ -1,31 +1,87 @@
 <html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Rubik:900" rel="stylesheet">
+        <style>
+        	.inactive{
+        		display: none;
+        	}
+            .huge {
+                width: 100%;
+                height: 100%;
+                font-size:xx-large;
+            }
+            .bigRedButton {
+                color: white;
+                font-size: 100px;
+                font-family: 'Rubik', sans-serif;
+                background-color: #e00b0b;
+                border: none;
+                position: static;
+                z-index: 100000;
+            }
+                .bigRedButton:hover {
+                    cursor: pointer;
+                }
+            #divMap {
+                position: static !important; 
+                z-index: 1;
+            }
+            body {
+                margin: 0px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div id="divRowForButton" class="row">
+        	<div class="column" style="align-content:center">
+        		<button id="btnBigRedButton" class="huge bigRedButton" onclick="hideButton()">FIND CATHY</button>
+        	</div>
+        </div>
+        <div id="divMap"></div>
+        <!-- Javascript functions -->
+        
+        <script>
+        	function hideButton(){
+        	    document.getElementById("divRowForButton").className += " inactive";
+        	    myMap();
+        	}
 
-<head>
-<!--Bootstrap-->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        	function myMap() {
+        	    var mapCanvas = document.getElementById("divMap");
+        	    var mapOptions = {
+        	        center: new google.maps.LatLng(51.5, -0.2),
+        	        zoom: 10
+        	    };
+        	    var map = new google.maps.Map(mapCanvas, mapOptions);
 
-<style>
-	.inactive{
-		display: none;
-	}
-</style>
+        	    // Try HTML5 geolocation.
+        	    if (navigator.geolocation) {
+        	        navigator.geolocation.getCurrentPosition(function (position) {
+        	            var pos = {
+        	                lat: position.coords.latitude,
+        	                lng: position.coords.longitude
+        	            };
 
-</head>
+        	            infoWindow.setPosition(pos);
+        	            infoWindow.setContent('Location found.');
+        	            map.setCenter(pos);
+        	        }, function () {
+        	            handleLocationError(true, infoWindow, map.getCenter());
+        	        });
+        	    } else {
+        	        // Browser doesn't support Geolocation
+        	        handleLocationError(false, infoWindow, map.getCenter());
+        	    }
+        	}
 
-
-<div id="divRowForButton" class="row">
-	<div class="column">
-		<button id="btnBigRedButton" class="btn-danger btn-lg" onclick="hideButton()">FIND CATHY</button>
-	</div>
-</div>
-
-<script>
-	function hideButton(){
-		document.getElementById("btnBigRedButton").className += " inactive";
-	}
-</script>
-
-</body>
-
+        	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        	    infoWindow.setPosition(pos);
+        	    infoWindow.setContent(browserHasGeolocation ?
+                                      'Error: The Geolocation service failed.' :
+                                      'Error: Your browser doesn\'t support geolocation.');
+        	}
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKSmNdghNoAxhCShPmy2k2cW-AnncbxpA"></script>
+    </body>
 </html>
