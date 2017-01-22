@@ -19,7 +19,7 @@
             background-color: #e00b0b;
             border: none;
             position: static;
-            z-index: 100000;
+            z-index: 1000000;
         }
 
             .bigRedButton:hover {
@@ -30,6 +30,51 @@
             position: static !important;
             z-index: 1;
         }
+#divMap {
+  height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#right-panel {
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+#right-panel select, #right-panel input {
+  font-size: 15px;
+}
+
+#right-panel select {
+  width: 100%;
+}
+
+#right-panel i {
+  font-size: 12px;
+}
+#right-panel {
+  height: 100%;
+  float: right;
+  width: 390px;
+  overflow: auto;
+}
+#divMap {
+  margin-right: 400px;
+}
+
+@media print {
+  #divMap {
+    height: 500px;
+    margin: 0;
+  }
+  #right-panel {
+    float: none;
+    width: auto;
+  }
 
         body {
             margin: 0px;
@@ -44,6 +89,7 @@
         </div>
     </div>
     <div id="divMap"></div>
+    <div id="right-panel"></div>
     <!-- Javascript functions -->
 
     <script>
@@ -87,7 +133,8 @@
                     var directionsDisplay = new google.maps.DirectionsRenderer;
 
                     directionsDisplay.setMap(map);
-                
+                    directionsDisplay.setPanel(document.getElementById('right-panel'));
+
                     calculateAndDisplayRoute(directionsService, directionsDisplay, currentPos, marker.position);
                 }, function () {
                     handleLocationError(true, infoWindow, map.getCenter());
