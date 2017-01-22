@@ -89,8 +89,8 @@
         	                handleLocationError(true, infoWindow, map.getCenter());
         	            });
         	            if (currentPos != 'undefined') { 
-        	                var latitude = pos.lat;
-        	                var longitude = pos.lng;
+        	                var latitude = pos.coords.latitude;
+        	                var longitude = pos.coords.longitude;
         	            }
         	        } else {
         	            // Browser doesn't support Geolocation
