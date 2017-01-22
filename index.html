@@ -68,6 +68,27 @@
 
 
         	    var directionsService = google.maps.DirectionsService;
+        	    var directionsDisplay = new google.maps.DriectionsRenderer;
+
+        	    directionsDisplay.setMap(map);
+
+        	    var onChangeHandler = function () {
+        	        calculateAndDisplayRoute(directionsService, directionsDisplay);
+        	    }
+
+        	    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        	        directionsService.route({
+        	            origin: mapOptions.center,
+        	            destination: marker.position,
+        	            travelMode: 'DRIVING'
+        	        }, function (response, status) {
+        	            if (status === 'OK') {
+        	                directionsDisplay.setDirections(response);
+        	            } else {
+        	                window.alert('Directions request failed due to ' + status);
+        	            }
+        	        });
+        	    }
 
         	    // loop to take a look at location... every 30 seconds???
         	    // this may be resource heavy and slow?
